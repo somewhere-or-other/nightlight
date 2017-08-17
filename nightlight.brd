@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.6.0">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -328,14 +328,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <class number="0" name="default" width="0" drill="0">
 </class>
 </classes>
-<designrules name="default">
-<description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
-&lt;p&gt;
-Die Standard-Design-Rules sind so gewählt, dass sie für 
-die meisten Anwendungen passen. Sollte ihre Platine 
-besondere Anforderungen haben, treffen Sie die erforderlichen
-Einstellungen hier und speichern die Design Rules unter 
-einem neuen Namen ab.</description>
+<designrules name="SparkFun">
 <description language="en">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 The default Design Rules have been set to cover
@@ -357,11 +350,11 @@ design rules under a new name.</description>
 <param name="mdSmdSmd" value="8mil"/>
 <param name="mdViaViaSameLayer" value="8mil"/>
 <param name="mnLayersViaInSmd" value="2"/>
-<param name="mdCopperDimension" value="40mil"/>
+<param name="mdCopperDimension" value="10mil"/>
 <param name="mdDrill" value="8mil"/>
 <param name="mdSmdStop" value="0mil"/>
-<param name="msWidth" value="10mil"/>
-<param name="msDrill" value="24mil"/>
+<param name="msWidth" value="8mil"/>
+<param name="msDrill" value="20mil"/>
 <param name="msMicroVia" value="9.99mm"/>
 <param name="msBlindViaRatio" value="0.5"/>
 <param name="rvPadTop" value="0.25"/>
@@ -371,15 +364,15 @@ design rules under a new name.</description>
 <param name="rvViaInner" value="0.25"/>
 <param name="rvMicroViaOuter" value="0.25"/>
 <param name="rvMicroViaInner" value="0.25"/>
-<param name="rlMinPadTop" value="10mil"/>
+<param name="rlMinPadTop" value="12mil"/>
 <param name="rlMaxPadTop" value="20mil"/>
 <param name="rlMinPadInner" value="10mil"/>
 <param name="rlMaxPadInner" value="20mil"/>
-<param name="rlMinPadBottom" value="10mil"/>
+<param name="rlMinPadBottom" value="12mil"/>
 <param name="rlMaxPadBottom" value="20mil"/>
-<param name="rlMinViaOuter" value="8mil"/>
+<param name="rlMinViaOuter" value="10mil"/>
 <param name="rlMaxViaOuter" value="20mil"/>
-<param name="rlMinViaInner" value="8mil"/>
+<param name="rlMinViaInner" value="10mil"/>
 <param name="rlMaxViaInner" value="20mil"/>
 <param name="rlMinMicroViaOuter" value="4mil"/>
 <param name="rlMaxMicroViaOuter" value="20mil"/>
@@ -396,7 +389,7 @@ design rules under a new name.</description>
 <param name="mlMaxStopFrame" value="4mil"/>
 <param name="mlMinCreamFrame" value="0mil"/>
 <param name="mlMaxCreamFrame" value="0mil"/>
-<param name="mlViaStopLimit" value="0mil"/>
+<param name="mlViaStopLimit" value="25mil"/>
 <param name="srRoundness" value="0"/>
 <param name="srMinRoundness" value="0mil"/>
 <param name="srMaxRoundness" value="0mil"/>
@@ -415,7 +408,7 @@ design rules under a new name.</description>
 <pass name="Default">
 <param name="RoutingGrid" value="50mil"/>
 <param name="tpViaShape" value="round"/>
-<param name="PrefDir.1" value="|"/>
+<param name="PrefDir.1" value="0"/>
 <param name="PrefDir.2" value="0"/>
 <param name="PrefDir.3" value="0"/>
 <param name="PrefDir.4" value="0"/>
@@ -506,15 +499,21 @@ design rules under a new name.</description>
 </autorouter>
 <elements>
 <element name="U1" library="adafruit" package="ARDUINOR3-BPLACE" value="ARDUINOR3-BPLACE" x="11.43" y="8.89"/>
-<element name="Q1" library="adafruit" package="TO220V" value="Green" x="36.83" y="48.26" rot="R90"/>
-<element name="Q2" library="adafruit" package="TO220V" value="Red" x="52.07" y="40.64" rot="R90"/>
-<element name="Q3" library="adafruit" package="TO220V" value="Blue" x="36.83" y="33.02" rot="R90"/>
+<element name="Q1" library="adafruit" package="TO220V" value="Green1" x="68.58" y="52.07"/>
+<element name="Q2" library="adafruit" package="TO220V" value="Red1" x="57.15" y="38.1"/>
+<element name="Q3" library="adafruit" package="TO220V" value="Blue1" x="69.85" y="26.67"/>
 <element name="DCIN" library="SparkFun-Connectors" package="POWER_JACK_PTH_LOCK" value="POWER_JACKPTH_LOCK" x="12.7" y="21.59" rot="R270">
 <attribute name="SF_ID" value="PRT-00119" x="-43.18" y="2.54" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="PROD_ID" value="CONN-08197" x="-43.18" y="2.54" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="STR1" library="SparkFun-Connectors" package="1X04_LOCK_LONGPADS" value="" x="19.05" y="41.91">
-<attribute name="PROD_ID" value="CONN-09696" x="86.36" y="-15.24" size="1.778" layer="27" display="off"/>
+<element name="STR1" library="SparkFun-Connectors" package="1X04_LOCK_LONGPADS" value="" x="19.05" y="46.99" rot="R90">
+<attribute name="PROD_ID" value="CONN-09696" x="76.2" y="114.3" size="1.778" layer="27" rot="R90" display="off"/>
+</element>
+<element name="Q4" library="adafruit" package="TO220V" value="Green2" x="43.18" y="52.07"/>
+<element name="Q5" library="adafruit" package="TO220V" value="Red2" x="35.56" y="38.1"/>
+<element name="Q6" library="adafruit" package="TO220V" value="Blue2" x="43.18" y="25.4"/>
+<element name="STR2" library="SparkFun-Connectors" package="1X04_LOCK_LONGPADS" value="" x="19.05" y="33.02" rot="R90">
+<attribute name="PROD_ID" value="CONN-09696" x="19.05" y="33.02" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 </elements>
 <signals>
@@ -524,47 +523,25 @@ design rules under a new name.</description>
 <signal name="3V">
 <contactref element="U1" pad="3V"/>
 </signal>
-<signal name="N$3">
-<contactref element="Q2" pad="1"/>
-<contactref element="U1" pad="D5"/>
-<wire x1="54.61" y1="38.1" x2="62.23" y2="59.69" width="0" layer="19" extent="1-1"/>
-</signal>
 <signal name="N$12">
 <contactref element="Q3" pad="1"/>
 <contactref element="U1" pad="D3"/>
-<wire x1="39.37" y1="30.48" x2="67.31" y2="59.69" width="0" layer="19" extent="1-1"/>
+<wire x1="67.31" y1="24.13" x2="67.31" y2="59.69" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
 <contactref element="U1" pad="D6"/>
 <contactref element="Q1" pad="1"/>
-<wire x1="39.37" y1="45.72" x2="59.69" y2="59.69" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$9">
-<contactref element="U1" pad="GND2"/>
-<contactref element="U1" pad="GND1"/>
-<contactref element="DCIN" pad="PWR"/>
-<contactref element="Q3" pad="3"/>
-<contactref element="U1" pad="GND"/>
-<contactref element="Q2" pad="3"/>
-<contactref element="Q1" pad="3"/>
-<contactref element="STR1" pad="1"/>
-<wire x1="39.37" y1="50.8" x2="54.61" y2="43.18" width="0" layer="19" extent="1-1"/>
-<wire x1="37.846" y1="59.69" x2="39.37" y2="50.8" width="0" layer="19" extent="1-1"/>
-<wire x1="39.37" y1="35.56" x2="39.37" y2="50.8" width="0" layer="19" extent="1-1"/>
-<wire x1="26.5778" y1="21.59" x2="39.37" y2="35.56" width="0" layer="19" extent="1-1"/>
-<wire x1="19.05" y1="41.91" x2="39.37" y2="35.56" width="0" layer="19" extent="1-1"/>
-<wire x1="52.07" y1="11.43" x2="39.37" y2="35.56" width="0" layer="19" extent="1-1"/>
-<wire x1="54.61" y1="11.43" x2="52.07" y2="11.43" width="0" layer="19" extent="1-1"/>
+<wire x1="66.04" y1="49.53" x2="59.69" y2="59.69" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$2">
-<contactref element="STR1" pad="3"/>
 <contactref element="Q2" pad="2"/>
-<wire x1="24.13" y1="41.91" x2="54.61" y2="40.64" width="0" layer="19" extent="1-1"/>
+<contactref element="STR1" pad="3"/>
+<wire x1="19.05" y1="52.07" x2="57.15" y2="35.56" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$13">
 <contactref element="STR1" pad="4"/>
 <contactref element="Q1" pad="2"/>
-<wire x1="26.67" y1="41.656" x2="39.37" y2="48.26" width="0" layer="19" extent="1-1"/>
+<wire x1="19.304" y1="54.61" x2="68.58" y2="49.53" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$4">
 <contactref element="DCIN" pad="GND"/>
@@ -574,7 +551,67 @@ design rules under a new name.</description>
 <signal name="N$5">
 <contactref element="Q3" pad="2"/>
 <contactref element="STR1" pad="2"/>
-<wire x1="21.59" y1="41.656" x2="39.37" y2="33.02" width="0" layer="19" extent="1-1"/>
+<wire x1="19.304" y1="49.53" x2="69.85" y2="24.13" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$3">
+<contactref element="U1" pad="D5"/>
+<contactref element="Q2" pad="1"/>
+<wire x1="54.61" y1="35.56" x2="62.23" y2="59.69" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$8">
+<contactref element="Q6" pad="1"/>
+<contactref element="U1" pad="D9"/>
+<wire x1="40.64" y1="22.86" x2="50.546" y2="59.69" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$10">
+<contactref element="Q5" pad="1"/>
+<contactref element="U1" pad="D10"/>
+<wire x1="33.02" y1="35.56" x2="48.006" y2="59.69" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$11">
+<contactref element="U1" pad="D11"/>
+<contactref element="Q4" pad="1"/>
+<wire x1="40.64" y1="49.53" x2="45.466" y2="59.69" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$14">
+<contactref element="STR2" pad="4"/>
+<contactref element="Q4" pad="2"/>
+<wire x1="19.304" y1="40.64" x2="43.18" y2="49.53" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$15">
+<contactref element="Q5" pad="2"/>
+<contactref element="STR2" pad="3"/>
+<wire x1="19.05" y1="38.1" x2="35.56" y2="35.56" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$16">
+<contactref element="Q6" pad="2"/>
+<contactref element="STR2" pad="2"/>
+<wire x1="19.304" y1="35.56" x2="43.18" y2="22.86" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$17">
+<contactref element="U1" pad="GND"/>
+<contactref element="Q2" pad="3"/>
+<contactref element="Q1" pad="3"/>
+<contactref element="Q6" pad="3"/>
+<contactref element="Q5" pad="3"/>
+<contactref element="Q4" pad="3"/>
+<contactref element="Q3" pad="3"/>
+<contactref element="STR1" pad="1"/>
+<contactref element="U1" pad="GND2"/>
+<contactref element="U1" pad="GND1"/>
+<contactref element="DCIN" pad="PWR"/>
+<contactref element="STR2" pad="1"/>
+<wire x1="59.69" y1="35.56" x2="71.12" y2="49.53" width="0" layer="19" extent="1-1"/>
+<wire x1="72.39" y1="24.13" x2="59.69" y2="35.56" width="0" layer="19" extent="1-1"/>
+<wire x1="45.72" y1="22.86" x2="59.69" y2="35.56" width="0" layer="19" extent="1-1"/>
+<wire x1="52.07" y1="11.43" x2="45.72" y2="22.86" width="0" layer="19" extent="1-1"/>
+<wire x1="54.61" y1="11.43" x2="52.07" y2="11.43" width="0" layer="19" extent="1-1"/>
+<wire x1="38.1" y1="35.56" x2="45.72" y2="22.86" width="0" layer="19" extent="1-1"/>
+<wire x1="45.72" y1="49.53" x2="38.1" y2="35.56" width="0" layer="19" extent="1-1"/>
+<wire x1="37.846" y1="59.69" x2="45.72" y2="49.53" width="0" layer="19" extent="1-1"/>
+<wire x1="26.5778" y1="21.59" x2="38.1" y2="35.56" width="0" layer="19" extent="1-1"/>
+<wire x1="19.05" y1="33.02" x2="26.5778" y2="21.59" width="0" layer="19" extent="1-1"/>
+<wire x1="19.05" y1="46.99" x2="19.05" y2="33.02" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
