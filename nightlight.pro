@@ -2,8 +2,8 @@ EAGLE AutoRouter Statistics:
 
 Job           : /home/ltb9/Documents/Personal/eagle/nightlight/nightlight.brd
 
-Start at      : 11:41:39 (8/23/17)
-End at        : 11:41:39 (8/23/17)
+Start at      : 11:49:53 (8/23/17)
+End at        : 11:49:53 (8/23/17)
 Elapsed time  : 00:00:00
 
 Signals       :    11   RoutingGrid: 50 mil  Layers: 1
