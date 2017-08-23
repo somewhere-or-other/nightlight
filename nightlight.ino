@@ -2,9 +2,9 @@
 // in the #defines
 // public domain, enjoy!
  
-#define REDPIN 5
-#define GREENPIN 6
-#define BLUEPIN 3
+#define REDPIN 10
+#define GREENPIN 11
+#define BLUEPIN 9
  
 #define FADESPEED 5     // make this higher to slow down
  
@@ -17,6 +17,11 @@ void setup() {
  
 void loop() {
   int r, g, b;
+ 
+ 
+
+  
+  
  
   // fade from blue to violet
   for (r = 0; r < 256; r++) { 
