@@ -1930,6 +1930,7 @@ Standard 4-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <part name="Q3" library="adafruit" deviceset="MOSFET-N" device="GDS_TO220V" value="Blue1"/>
 <part name="LED1" library="SparkFun-Connectors" deviceset="M04" device="LOCK_LONGPADS"/>
 <part name="DCIN" library="SparkFun-Connectors" deviceset="M02" device="LOCK_LONGPADS"/>
+<part name="RST" library="SparkFun-Connectors" deviceset="M02" device="LOCK_LONGPADS"/>
 </parts>
 <sheets>
 <sheet>
@@ -1942,6 +1943,7 @@ Standard 4-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instance part="Q3" gate="G$1" x="83.82" y="25.4"/>
 <instance part="LED1" gate="G$1" x="142.24" y="17.78" rot="MR0"/>
 <instance part="DCIN" gate="G$1" x="5.08" y="-7.62" rot="MR0"/>
+<instance part="RST" gate="G$1" x="-5.08" y="88.9" rot="MR270"/>
 </instances>
 <busses>
 </busses>
@@ -2039,6 +2041,18 @@ Standard 4-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <junction x="73.66" y="15.24"/>
 <junction x="-2.54" y="15.24"/>
 <pinref part="DCIN" gate="G$1" pin="2"/>
+<pinref part="RST" gate="G$1" pin="2"/>
+<wire x1="-2.54" y1="50.8" x2="-7.62" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="50.8" x2="-7.62" y2="81.28" width="0.1524" layer="91"/>
+<junction x="-2.54" y="50.8"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="/RESET"/>
+<pinref part="RST" gate="G$1" pin="1"/>
+<wire x1="0" y1="60.96" x2="-5.08" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="-5.08" y1="60.96" x2="-5.08" y2="81.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
