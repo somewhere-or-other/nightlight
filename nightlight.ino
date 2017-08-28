@@ -1,5 +1,6 @@
 #include <avr/sleep.h>
- 
+#include "nightlight.h"
+
 #define REDPIN 10
 #define GREENPIN 11
 #define BLUEPIN 9
@@ -13,14 +14,15 @@
 #define TIMELIMIT 120000 //2 minutes in millisec - for testing
 
 float r, g, b;
- 
-float rtarget, gtarget, btarget;
+
+//float rtarget, gtarget, btarget;
 
 float rdelta, gdelta, bdelta;
 
 int colormax = 255;
 
 unsigned long starttime;
+
 
 
 unsigned long elapsedTime(unsigned long a, unsigned long b) {
@@ -32,8 +34,31 @@ unsigned long elapsedTime(unsigned long a, unsigned long b) {
   }
 }
 
-
-
+RGB hsi_to_rgb(const HSI hsi) {
+  RGB retrgb;
+ 
+  retrgb = { 0, 0, 0 }; //default value
+  
+  int hp = (int)(hsi.h * 360 / 60);
+  float z = 1 - abs( (hp%2) - 1);
+  float c = (3*hsi.i*hsi.s)/(1+z);
+  float x = c*z;
+  
+  if (0<=hp && hp<=1)
+    retrgb = {c, x, 0};
+  else if (1<=hp && hp<=2)
+    retrgb = {x, c, 0};
+  else if (2<=hp && hp<=3)
+    retrgb = {0, c, x};
+  else if (3<=hp && hp<=4)
+    retrgb = {0, x, c};
+  else if (4<=hp && hp<=5)
+    retrgb = {x, 0, c};
+  else if (5<=hp && hp<=6)
+    retrgb = {c, 0, x};
+  
+  return retrgb;
+}
 
 
 void setup() {
@@ -92,23 +117,49 @@ void loop() {
   if (colormax <= 0) {
     //Serial.write("Sleeping due to running out of time");
     sleepNow();
-  } else {  
-    rtarget=random(colormax);
-    gtarget=random(colormax);
-    btarget=random(colormax);
+  } else {
     
+    HSI targethsi;
+    targethsi.h=((float)random(65000))/65000;
+    targethsi.s=((float)random(65000))/65000;
+    targethsi.i=colormax*((float)(random(65000))/65000);
+    
+//    targetrgb.r=random(colormax);
+//    targetrgb.g=random(colormax);
+//    targetrgb.b=random(colormax);
+
+    RGB targetrgb = hsi_to_rgb(targethsi);
+
+
+    Serial.write("Target (h, s, i): (");
+    Serial.print(targethsi.h);
+    Serial.write(", ");
+    Serial.print(targethsi.s);
+    Serial.write(", ");
+    Serial.print(targethsi.i);
+    Serial.write(") -> ");
+  
+    Serial.write("Target (r, g, b): (");
+    Serial.print(targetrgb.r);
+    Serial.write(", ");
+    Serial.print(targetrgb.g);
+    Serial.write(", ");
+    Serial.print(targetrgb.b);
+    Serial.write(")\n");
+
+   
     //color target sanity checks
-    if (rtarget <= 0)
-      rtarget=0;
-    if (gtarget <= 0)
-      gtarget=0;
-    if (btarget <= 0)
-      btarget=0;
+    if (targetrgb.r <= 0)
+      targetrgb.r=0;
+    if (targetrgb.g <= 0)
+      targetrgb.g=0;
+    if (targetrgb.b <= 0)
+      targetrgb.b=0;
       
     
-    rdelta = rtarget-r;
-    gdelta = gtarget-g;
-    bdelta = btarget-b;
+    rdelta = targetrgb.r-r;
+    gdelta = targetrgb.g-g;
+    bdelta = targetrgb.b-b;
 
     float ardelta = abs(rdelta);
     float agdelta = abs(gdelta);
@@ -120,7 +171,7 @@ void loop() {
     Serial.write("r value: ");
     Serial.print(r);
     Serial.write("; r target: ");
-    Serial.print(rtarget);
+    Serial.print(targetrgb.r);
     Serial.write("; r delta: ");
     Serial.print(rdelta);
     Serial.write("\n");
@@ -128,7 +179,7 @@ void loop() {
     Serial.write("g value: ");
     Serial.print(g);
     Serial.write("; g target: ");
-    Serial.print(gtarget);
+    Serial.print(targetrgb.g);
     Serial.write("; g delta: ");
     Serial.print(gdelta);
     Serial.write("\n");
@@ -136,7 +187,7 @@ void loop() {
     Serial.write("b value: ");
     Serial.print(b);
     Serial.write("; b target: ");
-    Serial.print(btarget);
+    Serial.print(targetrgb.b);
     Serial.write("; b delta: ");
     Serial.print(bdelta);
     Serial.write("\n");
@@ -162,7 +213,7 @@ void loop() {
         Serial.print(steps);
         Serial.write("\n");
         
-        Serial.write("Target (r,g,b): (");
+        Serial.write("Target (r, g, b): (");
         Serial.print((int)r);
         Serial.write(", ");
         Serial.print((int)g);
