@@ -6,8 +6,11 @@
  
 #define FADESPEED 5     // make this higher to slow down
 
-#define TIMELIMITHOURS 2 //time limit in hours
-#define TIMELIMIT TIMELIMITHOURS*3600*1000 //TIMELIMITHOURS hours * 3600 sec/hr * 1000 millisec/sec
+//#define TIMELIMITHOURS 2 //time limit in hours
+//#define TIMELIMIT TIMELIMITHOURS*3600*1000 //TIMELIMITHOURS hours * 3600 sec/hr * 1000 millisec/sec
+
+
+#define TIMELIMIT 120000 //2 minutes in millisec - for testing
 
 float r, g, b;
  
@@ -19,6 +22,7 @@ int colormax = 255;
 
 unsigned long starttime;
 
+
 unsigned long elapsedTime(unsigned long a, unsigned long b) {
   if (b<a) {
     //implies an overflow and rollover
@@ -27,6 +31,10 @@ unsigned long elapsedTime(unsigned long a, unsigned long b) {
     return (b-a);
   }
 }
+
+
+
+
 
 void setup() {
   pinMode(REDPIN, OUTPUT);
@@ -61,14 +69,42 @@ void setup() {
 void loop() {
   
   //update colormax based on elapsed time
-  colormax = 255 - (int)(256L*((elapsedTime(starttime, millis()))/TIMELIMIT));
+  float elapsedtimeval=elapsedTime(starttime, millis());
+  float elapsedtimeratio=elapsedtimeval/TIMELIMIT;
+  
+//  Serial.write("elapsedtimeval: ");
+//  Serial.print(elapsedtimeval);
+//  Serial.write("; elapsedtimeratio: ");
+//  Serial.print(elapsedtimeratio);
+//  Serial.write("\n");
+//  
+  
+  
+  colormax = 255 - (int)(256L*elapsedtimeratio);
+  if (colormax <= 0)
+    colormax = 0; //just for a sanity check
+
+
+//  Serial.write("colormax: ");
+//  Serial.print(colormax);
+//  Serial.write("\n");
 
   if (colormax <= 0) {
+    //Serial.write("Sleeping due to running out of time");
     sleepNow();
   } else {  
     rtarget=random(colormax);
     gtarget=random(colormax);
     btarget=random(colormax);
+    
+    //color target sanity checks
+    if (rtarget <= 0)
+      rtarget=0;
+    if (gtarget <= 0)
+      gtarget=0;
+    if (btarget <= 0)
+      btarget=0;
+      
     
     rdelta = rtarget-r;
     gdelta = gtarget-g;
@@ -110,19 +146,30 @@ void loop() {
       g += gdelta/steps;
       b += bdelta/steps;
       
-      Serial.write("Stepcount: ");
-      Serial.print(stepcount);
-      Serial.write("; Steps: ");
-      Serial.print(steps);
-      Serial.write("\n");
+      //color level sanity checks
+      if (r <= 0)
+        r = 0;
+      if (g <= 0)
+        g = 0;
+      if (b <= 0)
+        b = 0;
       
-      Serial.write("Target (r,g,b): (");
-      Serial.print((int)r);
-      Serial.write(", ");
-      Serial.print((int)g);
-      Serial.write(", ");
-      Serial.print((int)b);
-      Serial.write(")\n");
+      if (stepcount%20 == 0) {
+        
+        Serial.write("Stepcount: ");
+        Serial.print(stepcount);
+        Serial.write("; Steps: ");
+        Serial.print(steps);
+        Serial.write("\n");
+        
+        Serial.write("Target (r,g,b): (");
+        Serial.print((int)r);
+        Serial.write(", ");
+        Serial.print((int)g);
+        Serial.write(", ");
+        Serial.print((int)b);
+        Serial.write(")\n");
+      }
       
       analogWrite(REDPIN, (int)r);
       analogWrite(GREENPIN, (int)g);
@@ -243,3 +290,9 @@ void sleepNow()         // here we put the arduino to sleep
                              // during normal running time.
  
 }
+
+
+
+
+
+
