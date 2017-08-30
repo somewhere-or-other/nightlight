@@ -1,4 +1,5 @@
 #include <avr/sleep.h>
+#include <math.h>
 #include "nightlight.h"
 
 #define REDPIN 10
@@ -11,7 +12,8 @@
 //#define TIMELIMIT TIMELIMITHOURS*3600*1000 //TIMELIMITHOURS hours * 3600 sec/hr * 1000 millisec/sec
 
 
-#define TIMELIMIT 120000 //2 minutes in millisec - for testing
+//#define TIMELIMIT 120000 //2 minutes in millisec - for testing
+#define TIMELIMIT 60000 //1 minute in millisec - for testing
 
 float r, g, b;
 
@@ -34,28 +36,75 @@ unsigned long elapsedTime(unsigned long a, unsigned long b) {
   }
 }
 
+
+//TODO: redo this using example from http://blog.saikoled.com/post/43693602826/why-every-led-light-should-be-using-hsi
 RGB hsi_to_rgb(const HSI hsi) {
   RGB retrgb;
  
   retrgb = { 0, 0, 0 }; //default value
   
-  int hp = (int)(hsi.h * 360 / 60);
-  float z = 1 - abs( (hp%2) - 1);
-  float c = (3*hsi.i*hsi.s)/(1+z);
-  float x = c*z;
+//  int hp = (int)(hsi.h * 360 / 60);
+//  float z = 1 - abs( (hp%2) - 1);
+//  float c = 256.0*(3*hsi.i*hsi.s)/(1+z);
+//  float x = 256.0*c*z;
+//  
+//  
+//  Serial.write("hp: ");
+//  Serial.print(hp);
+//  Serial.write("; z: ");
+//  Serial.print(z);
+//  Serial.write("; c: ");
+//  Serial.print(c);
+//  Serial.write("; x: ");
+//  Serial.print(x);
+//  Serial.write("\n");
+//  
+//  
+//  
+//  if (0<=hp && hp<=1)
+//    retrgb = {c, x, 0};
+//  else if (1<=hp && hp<=2)
+//    retrgb = {x, c, 0};
+//  else if (2<=hp && hp<=3)
+//    retrgb = {0, c, x};
+//  else if (3<=hp && hp<=4)
+//    retrgb = {0, x, c};
+//  else if (4<=hp && hp<=5)
+//    retrgb = {x, 0, c};
+//  else if (5<=hp && hp<=6)
+//    retrgb = {c, 0, x};
+//  
+
+  HSI lhsi = hsi;
+
+  float r, g, b;
+
+  if (hsi.s>1) lhsi.s=1;
+  if (hsi.i>1) lhsi.i=1;
+  if (hsi.s==0) {
+    retrgb = { 0, 0, 0 };
+  } else {
+    if ( ( lhsi.h >=0) && (lhsi.h < 2*M_PI/3) ){
+      b = (1-lhsi.s)/3;
+      r = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
+      g = 1-r-b;
+    } else if ( (lhsi.h>=2*M_PI/3) && (lhsi.h<4*M_PI/3) ) {
+      lhsi.h = lhsi.h-2*M_PI/3;
+      r = (1-lhsi.s)/3;
+      g = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
+      b = 1-r-g;
+    } else if ( (lhsi.h>=4*M_PI/3) && (lhsi.h<2*M_PI) ) {
+      lhsi.h = lhsi.h-4*M_PI/3;
+      g = (1-lhsi.s)/3;
+      b = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
+      r = 1-b-g;
+    }
+    retrgb.r = 256.0*r;
+    retrgb.g = 256.0*g;
+    retrgb.b = 256.0*b;
+    
+  } //end else (hsi.s != 0)
   
-  if (0<=hp && hp<=1)
-    retrgb = {c, x, 0};
-  else if (1<=hp && hp<=2)
-    retrgb = {x, c, 0};
-  else if (2<=hp && hp<=3)
-    retrgb = {0, c, x};
-  else if (3<=hp && hp<=4)
-    retrgb = {0, x, c};
-  else if (4<=hp && hp<=5)
-    retrgb = {x, 0, c};
-  else if (5<=hp && hp<=6)
-    retrgb = {c, 0, x};
   
   return retrgb;
 }
@@ -108,21 +157,26 @@ void loop() {
   colormax = 255 - (int)(256L*elapsedtimeratio);
   if (colormax <= 0)
     colormax = 0; //just for a sanity check
+  if (colormax > 128) //keeping it at 1/2 brightness or below
+    colormax = 128;
 
 
-//  Serial.write("colormax: ");
-//  Serial.print(colormax);
-//  Serial.write("\n");
+
 
   if (colormax <= 0) {
     //Serial.write("Sleeping due to running out of time");
     sleepNow();
   } else {
+    Serial.write("colormax: ");
+    Serial.print(colormax);
+    Serial.write("\n");
+    
+    
     
     HSI targethsi;
     targethsi.h=((float)random(65000))/65000;
     targethsi.s=((float)random(65000))/65000;
-    targethsi.i=colormax*((float)(random(65000))/65000);
+    targethsi.i=((float)colormax)/256;
     
 //    targetrgb.r=random(colormax);
 //    targetrgb.g=random(colormax);
@@ -205,23 +259,23 @@ void loop() {
       if (b <= 0)
         b = 0;
       
-      if (stepcount%20 == 0) {
-        
-        Serial.write("Stepcount: ");
-        Serial.print(stepcount);
-        Serial.write("; Steps: ");
-        Serial.print(steps);
-        Serial.write("\n");
-        
-        Serial.write("Target (r, g, b): (");
-        Serial.print((int)r);
-        Serial.write(", ");
-        Serial.print((int)g);
-        Serial.write(", ");
-        Serial.print((int)b);
-        Serial.write(")\n");
-      }
-      
+//      if (stepcount%20 == 0) {
+//        
+//        Serial.write("Stepcount: ");
+//        Serial.print(stepcount);
+//        Serial.write("; Steps: ");
+//        Serial.print(steps);
+//        Serial.write("\n");
+//        
+//        Serial.write("Target (r, g, b): (");
+//        Serial.print((int)r);
+//        Serial.write(", ");
+//        Serial.print((int)g);
+//        Serial.write(", ");
+//        Serial.print((int)b);
+//        Serial.write(")\n");
+//      }
+//      
       analogWrite(REDPIN, (int)r);
       analogWrite(GREENPIN, (int)g);
       analogWrite(BLUEPIN, (int)b);
