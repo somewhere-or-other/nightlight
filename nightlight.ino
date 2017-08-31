@@ -75,36 +75,58 @@ RGB hsi_to_rgb(const HSI hsi) {
 //    retrgb = {c, 0, x};
 //  
 
-  HSI lhsi = hsi;
+//  HSI lhsi = hsi;
+//
+//  float r, g, b;
+//
+//  if (hsi.s>1) lhsi.s=1;
+//  if (hsi.i>1) lhsi.i=1;
+//  if (hsi.s==0) {
+//    retrgb = { 0, 0, 0 };
+//  } else {
+//    if ( ( lhsi.h >=0) && (lhsi.h < 2*M_PI/3) ){
+//      b = (1-lhsi.s)/3;
+//      r = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
+//      g = 1-r-b;
+//    } else if ( (lhsi.h>=2*M_PI/3) && (lhsi.h<4*M_PI/3) ) {
+//      lhsi.h = lhsi.h-2*M_PI/3;
+//      r = (1-lhsi.s)/3;
+//      g = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
+//      b = 1-r-g;
+//    } else if ( (lhsi.h>=4*M_PI/3) && (lhsi.h<2*M_PI) ) {
+//      lhsi.h = lhsi.h-4*M_PI/3;
+//      g = (1-lhsi.s)/3;
+//      b = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
+//      r = 1-b-g;
+//    }
+//    retrgb.r = 256.0*r;
+//    retrgb.g = 256.0*g;
+//    retrgb.b = 256.0*b;
+//    
+//  } //end else (hsi.s != 0)
+//  
 
-  float r, g, b;
 
-  if (hsi.s>1) lhsi.s=1;
-  if (hsi.i>1) lhsi.i=1;
-  if (hsi.s==0) {
-    retrgb = { 0, 0, 0 };
-  } else {
-    if ( ( lhsi.h >=0) && (lhsi.h < 2*M_PI/3) ){
-      b = (1-lhsi.s)/3;
-      r = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
-      g = 1-r-b;
-    } else if ( (lhsi.h>=2*M_PI/3) && (lhsi.h<4*M_PI/3) ) {
-      lhsi.h = lhsi.h-2*M_PI/3;
-      r = (1-lhsi.s)/3;
-      g = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
-      b = 1-r-g;
-    } else if ( (lhsi.h>=4*M_PI/3) && (lhsi.h<2*M_PI) ) {
-      lhsi.h = lhsi.h-4*M_PI/3;
-      g = (1-lhsi.s)/3;
-      b = (1+lhsi.s*cos(lhsi.h)/cos(M_PI/3-lhsi.h))/3;
-      r = 1-b-g;
-    }
-    retrgb.r = 256.0*r;
-    retrgb.g = 256.0*g;
-    retrgb.b = 256.0*b;
-    
-  } //end else (hsi.s != 0)
+  retrgb = {0,0,0}; //default value
   
+  //convert hsi.h from [0-1] to radians
+  float H = hsi.h*2*M_PI;
+  
+  if(H < 2.09439) {
+    retrgb.r = 255*hsi.i/3*(1+hsi.s*cos(H)/cos(1.047196667-H));
+    retrgb.g = 255*hsi.i/3*(1+hsi.s*(1-cos(H)/cos(1.047196667-H)));
+    retrgb.b = 255*hsi.i/3*(1-hsi.s);
+  } else if(H < 4.188787) {
+    H = H - 2.09439;
+    retrgb.g = 255*hsi.i/3*(1+hsi.s*cos(H)/cos(1.047196667-H));
+    retrgb.b = 255*hsi.i/3*(1+hsi.s*(1-cos(H)/cos(1.047196667-H)));
+    retrgb.r = 255*hsi.i/3*(1-hsi.s);
+  } else {
+    H = H - 4.188787;
+    retrgb.b = 255*hsi.i/3*(1+hsi.s*cos(H)/cos(1.047196667-H));
+    retrgb.r = 255*hsi.i/3*(1+hsi.s*(1-cos(H)/cos(1.047196667-H)));
+    retrgb.g = 255*hsi.i/3*(1-hsi.s);
+  }
   
   return retrgb;
 }
