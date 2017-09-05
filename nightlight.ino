@@ -6,14 +6,16 @@
 #define GREENPIN 11
 #define BLUEPIN 9
  
-#define FADESPEED 5     // make this higher to slow down
-
 //#define TIMELIMITHOURS 2 //time limit in hours
 //#define TIMELIMIT TIMELIMITHOURS*3600*1000 //TIMELIMITHOURS hours * 3600 sec/hr * 1000 millisec/sec
 
 
 //#define TIMELIMIT 120000 //2 minutes in millisec - for testing
 #define TIMELIMIT 60000 //1 minute in millisec - for testing
+
+
+
+#define TRANSITIONTIME 2000 //time for a transition from one color to another, in millisec
 
 float r, g, b;
 
@@ -256,7 +258,9 @@ void loop() {
 
     //get max of ardelta, agdelta, abdelta
     int steps = (int)max(max(ardelta, agdelta), abdelta);
-	  
+    
+    int delaytime = TRANSITIONTIME/steps;
+    
     Serial.write("r value: ");
     Serial.print(r);
     Serial.write("; r target: ");
@@ -315,7 +319,7 @@ void loop() {
       analogWrite(GREENPIN, (int)g);
       analogWrite(BLUEPIN, (int)b);
       
-      delay(FADESPEED*10);
+      delay(delaytime);
       
       Serial.flush();
       
