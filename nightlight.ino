@@ -187,6 +187,19 @@ void loop() {
 
   if (colormax <= 0) {
     //Serial.write("Sleeping due to running out of time");
+    if (r != 0) {
+      r = 0;
+      analogWrite(REDPIN, (int)r); 
+    }
+    if (g != 0) {
+      g = 0;
+      analogWrite(GREENPIN, (int)g); 
+    }
+    if (b != 0) {
+      b = 0;
+      analogWrite(BLUEPIN, (int)b);
+    }
+    
     sleepNow();
   } else {
     Serial.write("colormax: ");
@@ -303,6 +316,8 @@ void loop() {
       analogWrite(BLUEPIN, (int)b);
       
       delay(FADESPEED*10);
+      
+      Serial.flush();
       
     }
   } // end if colormax > 0
