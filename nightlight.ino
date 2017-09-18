@@ -2,9 +2,9 @@
 #include <math.h>
 #include "nightlight.h"
 
-#define REDPIN 10
-#define GREENPIN 11
-#define BLUEPIN 9
+#define REDPIN 11
+#define GREENPIN 9
+#define BLUEPIN 10
  
 //#define TIMELIMITHOURS 2 //time limit in hours
 //#define TIMELIMIT TIMELIMITHOURS*3600*1000 //TIMELIMITHOURS hours * 3600 sec/hr * 1000 millisec/sec
