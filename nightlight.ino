@@ -2,8 +2,8 @@
 #include <math.h>
 #include "nightlight.h"
 
-#define REDPIN 11
-#define GREENPIN 10
+#define REDPIN 10
+#define GREENPIN 11
 #define BLUEPIN 9
  
 //#define TIMELIMITHOURS 2 //time limit in hours
