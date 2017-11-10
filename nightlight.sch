@@ -1945,7 +1945,7 @@ Standard 4-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instance part="Q2" gate="G$1" x="83.82" y="40.64"/>
 <instance part="Q3" gate="G$1" x="83.82" y="25.4"/>
 <instance part="LED1" gate="G$1" x="142.24" y="17.78" rot="MR0"/>
-<instance part="DCIN" gate="G$1" x="5.08" y="-7.62" rot="MR0"/>
+<instance part="DCIN" gate="G$1" x="5.08" y="-7.62" rot="R180"/>
 <instance part="RST" gate="G$1" x="-5.08" y="88.9" rot="MR270"/>
 </instances>
 <busses>
@@ -2016,11 +2016,9 @@ Standard 4-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <net name="N$1" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="G"/>
-<wire x1="81.28" y1="63.5" x2="81.28" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="D9"/>
 <wire x1="81.28" y1="58.42" x2="81.28" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="58.42" x2="81.28" y2="58.42" width="0.1524" layer="91"/>
-<junction x="81.28" y="58.42"/>
 </segment>
 </net>
 <net name="N$8" class="1">
@@ -2028,20 +2026,20 @@ Standard 4-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="U1" gate="G$1" pin="GND2"/>
 <pinref part="U1" gate="G$1" pin="GND1"/>
 <wire x1="0" y1="53.34" x2="0" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="0" y1="50.8" x2="-2.54" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="0" y1="50.8" x2="-7.62" y2="50.8" width="0.1524" layer="91"/>
 <junction x="0" y="50.8"/>
-<wire x1="-2.54" y1="50.8" x2="-2.54" y2="15.24" width="0.1524" layer="91"/>
-<pinref part="DCIN" gate="G$1" pin="2"/>
+<wire x1="-7.62" y1="50.8" x2="-7.62" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="RST" gate="G$1" pin="2"/>
-<wire x1="-2.54" y1="15.24" x2="-2.54" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="-2.54" y1="50.8" x2="-7.62" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="-7.62" y1="50.8" x2="-7.62" y2="81.28" width="0.1524" layer="91"/>
-<junction x="-2.54" y="50.8"/>
+<junction x="-7.62" y="50.8"/>
 <pinref part="Q1" gate="G$1" pin="S"/>
 <wire x1="86.36" y1="50.8" x2="68.58" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="50.8" x2="68.58" y2="15.24" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="15.24" x2="-2.54" y2="15.24" width="0.1524" layer="91"/>
-<junction x="-2.54" y="15.24"/>
+<wire x1="68.58" y1="15.24" x2="-7.62" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="DCIN" gate="G$1" pin="2"/>
+<wire x1="-2.54" y1="-10.16" x2="-7.62" y2="-10.16" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="-10.16" x2="-7.62" y2="15.24" width="0.1524" layer="91"/>
+<junction x="-7.62" y="15.24"/>
 </segment>
 </net>
 <net name="N$9" class="1">
