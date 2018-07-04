@@ -4936,18 +4936,12 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <wire x1="0" y1="53.34" x2="0" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="0" y1="50.8" x2="-7.62" y2="50.8" width="0.1524" layer="91"/>
 <junction x="0" y="50.8"/>
-<wire x1="-7.62" y1="50.8" x2="-7.62" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="RST" gate="G$1" pin="2"/>
 <wire x1="-7.62" y1="50.8" x2="-7.62" y2="81.28" width="0.1524" layer="91"/>
 <junction x="-7.62" y="50.8"/>
-<wire x1="68.58" y1="71.12" x2="68.58" y2="15.24" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="15.24" x2="-7.62" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="DCIN" gate="G$1" pin="2"/>
-<junction x="-7.62" y="15.24"/>
-<pinref part="U1" gate="G$1" pin="GND"/>
 <wire x1="-7.62" y1="-27.94" x2="-7.62" y2="-20.32" width="0.1524" layer="91"/>
-<wire x1="-7.62" y1="-20.32" x2="-7.62" y2="15.24" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="71.12" x2="68.58" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="-20.32" x2="-7.62" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="7.62" y1="-20.32" x2="-7.62" y2="-20.32" width="0.1524" layer="91"/>
 <junction x="7.62" y="-20.32"/>
 <junction x="-7.62" y="-20.32"/>
