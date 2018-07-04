@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.6.0">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4927,8 +4927,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="C2" gate="G$1" pin="-"/>
-<wire x1="55.88" y1="-20.32" x2="55.88" y2="-17.78" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="-17.78" x2="55.88" y2="-12.7" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-20.32" x2="55.88" y2="-12.7" width="0.1524" layer="91"/>
 <wire x1="55.88" y1="-20.32" x2="43.18" y2="-20.32" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="-20.32" x2="7.62" y2="-20.32" width="0.1524" layer="91"/>
 <wire x1="7.62" y1="-20.32" x2="7.62" y2="-15.24" width="0.1524" layer="91"/>
@@ -4946,20 +4945,19 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <wire x1="7.62" y1="-20.32" x2="-7.62" y2="-20.32" width="0.1524" layer="91"/>
 <junction x="7.62" y="-20.32"/>
 <junction x="-7.62" y="-20.32"/>
+<pinref part="J1" gate="J$1" pin="2"/>
+<wire x1="55.88" y1="-20.32" x2="81.28" y2="-20.32" width="0.1524" layer="91"/>
+<junction x="55.88" y="-20.32"/>
 <pinref part="R1" gate="G$1" pin="E"/>
 <junction x="43.18" y="-20.32"/>
-<pinref part="J1" gate="J$1" pin="3"/>
-<wire x1="81.28" y1="-17.78" x2="55.88" y2="-17.78" width="0.1524" layer="91"/>
-<junction x="55.88" y="-17.78"/>
 </segment>
 </net>
 <net name="N$5" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="D3"/>
-<wire x1="60.96" y1="40.64" x2="76.2" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="J1" gate="J$1" pin="2"/>
-<wire x1="81.28" y1="-20.32" x2="76.2" y2="-20.32" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="-20.32" x2="76.2" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="J1" gate="J$1" pin="3"/>
+<wire x1="60.96" y1="40.64" x2="81.28" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="40.64" x2="81.28" y2="-17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

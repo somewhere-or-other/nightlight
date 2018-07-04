@@ -1,6 +1,6 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /home/ltb9/Documents/Personal/eagle/nightlight/nightlight.brd
+Job           : /home/lbrown/eagle/nightlight/nightlight.brd
 
 Start at      : 08:10:40 (7/4/18)
 End at        : 08:10:40 (7/4/18)
@@ -20,6 +20,6 @@ max. Total        :         0         7         0         0         0         0
 
 Routed            :         0        16        16        16        16        16
 Vias              :         0         0         0         0         0         0
-Resolution        :     5.9 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Resolution        :     0.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
