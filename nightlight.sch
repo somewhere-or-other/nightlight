@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4942,7 +4942,8 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <junction x="-7.62" y="50.8"/>
 <pinref part="DCIN" gate="G$1" pin="2"/>
 <wire x1="-7.62" y1="-27.94" x2="-7.62" y2="-20.32" width="0.1524" layer="91"/>
-<wire x1="-7.62" y1="-20.32" x2="-7.62" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="-20.32" x2="-7.62" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="20.32" x2="-7.62" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="7.62" y1="-20.32" x2="-7.62" y2="-20.32" width="0.1524" layer="91"/>
 <junction x="7.62" y="-20.32"/>
 <junction x="-7.62" y="-20.32"/>
@@ -4951,6 +4952,11 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <pinref part="J1" gate="J$1" pin="3"/>
 <wire x1="81.28" y1="-17.78" x2="55.88" y2="-17.78" width="0.1524" layer="91"/>
 <junction x="55.88" y="-17.78"/>
+<pinref part="U1" gate="G$1" pin="GND"/>
+<wire x1="60.96" y1="71.12" x2="66.04" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="71.12" x2="66.04" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="20.32" x2="-7.62" y2="20.32" width="0.1524" layer="91"/>
+<junction x="-7.62" y="20.32"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -4966,14 +4972,8 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 </sheet>
 </sheets>
 <errors>
-<approved hash="104,1,60.96,71.12,U1,GND,N$8,,,"/>
-<approved hash="104,1,0,48.26,U1,VIN,N$4,,,"/>
-<approved hash="104,1,0,50.8,U1,GND1,N$8,,,"/>
-<approved hash="104,1,0,53.34,U1,GND2,N$8,,,"/>
 <approved hash="204,1,0,55.88,U1,5V,,,,"/>
 <approved hash="204,1,0,58.42,U1,3V,,,,"/>
-<approved hash="113,1,140.377,20.5147,LED1,,,,,"/>
-<approved hash="113,1,0.677331,-4.88527,DCIN,,,,,"/>
 <approved hash="113,1,-7.81473,84.4973,RST,,,,,"/>
 </errors>
 </schematic>
