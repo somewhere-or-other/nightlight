@@ -2379,7 +2379,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </classes>
 <parts>
 <part name="U1" library="adafruit" deviceset="ARDUINOR3" device="-BPLACE"/>
-<part name="DCIN" library="SparkFun-Connectors" deviceset="M02" device="LOCK_LONGPADS"/>
+<part name="DCIN" library="SparkFun-Connectors" deviceset="M02" device="LOCK_LONGPADS" value="12V"/>
 <part name="RST" library="SparkFun-Connectors" deviceset="M02" device="LOCK_LONGPADS"/>
 <part name="C1" library="SparkFun-Passives" deviceset="CAP" device="EZ" value="0.33 uf"/>
 <part name="J1" library="SparkFun-Connectors" deviceset="M03" device="LOCK_LONGPADS" value="LED"/>
@@ -2488,6 +2488,10 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </sheet>
 </sheets>
 <errors>
+<approved hash="104,1,60.96,71.12,U1,GND,N$4,,,"/>
+<approved hash="104,1,0,48.26,U1,VIN,N$3,,,"/>
+<approved hash="104,1,0,50.8,U1,GND1,N$4,,,"/>
+<approved hash="104,1,0,53.34,U1,GND2,N$4,,,"/>
 <approved hash="204,1,0,55.88,U1,5V,,,,"/>
 <approved hash="204,1,0,58.42,U1,3V,,,,"/>
 <approved hash="113,1,-7.81473,84.4973,RST,,,,,"/>
